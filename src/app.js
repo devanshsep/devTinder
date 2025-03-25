@@ -1,42 +1,58 @@
 const express = require('express')
 
+const {adminAuth,UserAuth} = require('./middlewares/auth')
+
 const app = express()
 
 
-//app.use('/hello/hello ',function(req,res){
-//    res.send('hello ji')
-//    })
-//   
-//    app.use('/test',function(req,res){
-//        res.send("hello hello hello")
-//    })
-//    
-//
-//app.use('/',function(req,res){
-//    res.send('hello world')
+// app.use('/user',(req,res,next)=>{
+// 
+//     console.log("Response 1")
+// 
+//    // res.send("Response 1")
+// 
+// next()
+// 
+// })
+
+// app.get('/user',(req,res)=>{
+// 
+//     console.log("Response 2")
+// 
+//    // res.send("Response 2")
+
 //})
 
 
-app.get('/user',function(req,res){
-   res.send('hello ji')
+app.use('/admin',adminAuth)
+
+
+app.get('/user',UserAuth,(req,res)=>{
+    res.send('User Data send')
 })
 
-app.post('/user',function(req,res){
-    res.send('Hello hello hello')
+
+
+app.get('/admin/getAllData',(req,res)=>{
+    
+
+
+
+ res.send("Data are sent")
+     
+
+})
+
+
+app.get('/admin/deleteUser',(req,res)=>{    
+ 
+res.send('Data deleted successfully')
 })
 
 
 
 
 
-
-app.patch('/user',function(req,res){
-    res.send('only ji')
-})
-
-app.put('/user',function(req,res){
-    res.send('hello world')
-})
 
 
 
