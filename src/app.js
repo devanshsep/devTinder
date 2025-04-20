@@ -1,55 +1,49 @@
 const express = require("express")
 
 
+const {adminAuth,userAuth} = require('./middlewares/auth')
+
+
 const app = express()
 
 // This will Handle only get call to the /user
 
-
-
-
-
-// This will work on all Http methods
-
-app.use('/user',
-[  (req,res,next)=>{
-
- 
- // res.send("Hello ji 1")
-  next();
-
-
-},
-(req,res,next)=>{
-//res.send("hello ji 2")
-
-next()
-},
-
-
-
-
-(req,res,next) =>{
- // res.send("hello ji 3")
-
-  
-  next()
-},
-
-(req,res,next) =>{
- // res.send("hello ji 4")
-
-  next()
-}],
-
-(req,res) =>{
-  res.send("hello ji 5")
-
-
-}
-
-
+app.use('/admin',adminAuth
 )
+
+
+app.use('/user',userAuth,(req,res)=>{
+res.send("User Data send")
+})
+
+
+
+
+
+
+
+
+app.get('/admin/getAllData',(req,res)=>{
+//logic of fetching all Data
+
+res.send("All Data Send")
+}
+)
+
+
+
+
+
+
+app.get('/admin/DeleteUser',(req,res)=>{
+  res.send("Deleted a user")
+})
+
+
+
+
+
+
 
 app.listen(7000,()=>{
     console.log('Server is running')
