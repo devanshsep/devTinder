@@ -1,44 +1,39 @@
 const express = require("express")
 
 
-const {adminAuth,userAuth} = require('./middlewares/auth')
 
 
 const app = express()
 
-// This will Handle only get call to the /user
+// Logic of db call and get some user data 
 
-app.use('/admin',adminAuth
-)
+app.get('/getUserData',(req,res)=>{
 
 
-app.use('/user',userAuth,(req,res)=>{
-res.send("User Data send")
+  try {
+
+    throw new Error ("xyz")
+    res.send("User data send")
+    
+  } catch (error) {
+    res.status(500).send("Something went wrong contact support team")
+
+    
+  }
+
 })
 
 
 
 
+app.use('/',(err,req,res,next)=>{
 
 
+  if (err){
+    res.status(500).send("Something went wrong")
+  }
 
-
-app.get('/admin/getAllData',(req,res)=>{
-//logic of fetching all Data
-
-res.send("All Data Send")
-}
-)
-
-
-
-
-
-
-app.get('/admin/DeleteUser',(req,res)=>{
-  res.send("Deleted a user")
 })
-
 
 
 
